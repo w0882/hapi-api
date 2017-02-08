@@ -10,10 +10,10 @@ phases:
       - echo Nothing to do in install.
   pre_build:
     commands:
-      - echo Nothing to do in pre_build.
+      - npm install
   build:
     commands:
-      - echo Nothing to do in build.
+      - npm test
   post_build:
     commands:
       - echo Nothing to do in post_build
