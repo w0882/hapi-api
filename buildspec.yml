@@ -1,8 +1,8 @@
 version: 0.1
 
-environment_variables:
-  plaintext:
-    #key: "value"
+#environment_variables:
+#  plaintext:
+#  key: "value"
 
 phases:
   install:
