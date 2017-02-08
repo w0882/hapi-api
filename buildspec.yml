@@ -7,7 +7,10 @@ version: 0.1
 phases:
   install:
     commands:
-      - echo Nothing to do in install.
+      - apt-get update -y
+      - curl -sL https://deb.nodesource.com/setup_6.x | bash -
+      - apt-get install -y nodejs
+
   pre_build:
     commands:
       - npm install
