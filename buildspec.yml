@@ -19,8 +19,8 @@ phases:
       - npm test
   post_build:
     commands:
-      - echo Nothing to do in post_build
+      - tar czfv hapi-api.tar.gz *
 artifacts:
   files:
-    - **/*
-  discard-paths: no
+    - hapi-api.tar.gz
+  discard-paths: yes
