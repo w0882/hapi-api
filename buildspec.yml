@@ -19,7 +19,7 @@ phases:
       - npm test
   post_build:
     commands:
-      - tar czfv hapi-api.tar.gz *
+      - tar czf hapi-api.tar.gz *
 artifacts:
   files:
     - hapi-api.tar.gz
