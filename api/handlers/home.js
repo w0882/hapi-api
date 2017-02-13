@@ -1,6 +1,6 @@
 module.exports.hello = {
   handler: function (request, reply) {
-    return reply({ result: 'Hello hapi!' });
+    return reply({ result: 'Hello hapi application!' });
   }
 };
 
