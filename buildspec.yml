@@ -3,6 +3,8 @@ version: 0.1
 environment_variables:
   plaintext:
     AWS_REGION: "us-east-1"
+    ECR_REPO: "hapi-api"
+    BUILD_VERSION: "1"
 
 phases:
   install:
@@ -20,9 +22,11 @@ phases:
       - tar czf hapi-api.tar.gz *
   post_build:
     commands:
-      - uuid=$(date +%s)
+      - export BUILD_VERSION=$(date +%s)
       - eval $(aws --region ${AWS_REGION} ecr get-login)
-      - echo ${uuid}
+      - echo ${BUILD_VERSION}
+      - docker build -t ${ECR_REPO}:${BUILD_VERSION} .
+      - docker tag ${ECR_REPO}:${BUILD_VERSION} ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPO}:${BUIBUILD_VERSION}
 artifacts:
   files:
     - hapi-api.tar.gz
