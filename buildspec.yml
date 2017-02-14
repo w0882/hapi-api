@@ -26,7 +26,7 @@ phases:
       - eval $(aws --region ${AWS_REGION} ecr get-login)
       - docker build -t ${ECR_REPO}:latest .
       #- echo "Deploying docker build (version:$(git rev-parse $GIT_BRANCH | head -c 8)) to account: ${AWS_ACCOUNT_ID} ECR repo: ${ECR_REPO}"
-      - BUILD_VERSION=$(git rev-parse ${GIT_BRANCH} | head -c 8) && docker tag ${ECR_REPO}:latest ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPO}:${BUILD_VERSION} && docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPO}:${BUILD_VERSION}
+      - BUILD_VERSION=$(date +%s) && docker tag ${ECR_REPO}:latest ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPO}:${BUILD_VERSION} && docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPO}:${BUILD_VERSION}
 artifacts:
   files:
     - hapi-api.tar.gz
