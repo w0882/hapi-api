@@ -20,7 +20,9 @@ phases:
       - tar czf hapi-api.tar.gz *
   post_build:
     commands:
+      - uuid=$(date +%s)
       - eval $(aws --region ${AWS_REGION} ecr get-login)
+      - echo ${uuid}
 artifacts:
   files:
     - hapi-api.tar.gz
