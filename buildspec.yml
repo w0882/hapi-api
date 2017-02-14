@@ -4,6 +4,7 @@ environment_variables:
   plaintext:
     AWS_REGION: "us-east-1"
     GIT_BRANCH: "HEAD"
+    LOCAL_REPO: "hapi-api"
     ECR_REPO: "weitest/hapi-api"
     AWS_ACCOUNT_ID: "set your account ID in build project"
 
@@ -25,9 +26,9 @@ phases:
     commands:
       - eval $(aws --region ${AWS_REGION} ecr get-login)
       - echo build version: $(git rev-parse $GIT_BRANCH | head -c 8)
-      - docker build -t ${ECR_REPO}:latest .
-      - echo Deploying to account: ${AWS_ACCOUNT_ID} ECR repo: ${ECR_REPO} 
-      - BUILD_VERSION=$(git rev-parse $GIT_BRANCH | head -c 8) && docker tag ${ECR_REPO}:latest ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPO}:${BUILD_VERSION} && docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPO}:${BUIBUILD_VERSION}
+      - docker build -t ${LOCAL_REPO}:latest .
+      - echo Deploying to account: ${AWS_ACCOUNT_ID} ECR repo: ${ECR_REPO}
+      - BUILD_VERSION=$(git rev-parse $GIT_BRANCH | head -c 8) && docker tag ${LOCAL_REPO}:latest ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPO}:${BUILD_VERSION} && docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPO}:${BUIBUILD_VERSION}
 artifacts:
   files:
     - hapi-api.tar.gz
