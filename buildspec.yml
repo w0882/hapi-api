@@ -1,8 +1,8 @@
 version: 0.1
 
-#environment_variables:
-#  plaintext:
-#  key: "value"
+environment_variables:
+  plaintext:
+    AWS_REGION: "us-east-1"
 
 phases:
   install:
@@ -17,9 +17,10 @@ phases:
   build:
     commands:
       - npm test
+      - tar czf hapi-api.tar.gz *
   post_build:
     commands:
-      - tar czf hapi-api.tar.gz *
+      - echo $(aws --region ${AWS_REGION} ecr get-login)
 artifacts:
   files:
     - hapi-api.tar.gz
