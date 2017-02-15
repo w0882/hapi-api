@@ -7,13 +7,18 @@ BUILD_ARN=${CODEBUILD_BUILD_ARN}
 BUILD_VERSION=$(date +%Y%m%d%H%M%S)
 
 IFS=':' read -ra NAMES <<< "${BUILD_ARN}"
+
 AWS_ACCOUNT_ID=${AWS_ACCOUNT_ID:=${NAMES[4]}}
 
-echo "BUILD_ARN: ${BUILD_ARN}"
-echo "AWS_ACCOUNT_ID: ${AWS_ACCOUNT_ID}"
-echo "AWS_REGION: ${AWS_REGION}"
-echo "ECR_REPO: ${ECR_REPO}"
-echo "BUILD_VERSION: ${BUILD_VERSION}"
+echo "### BUILD_ARN: ${BUILD_ARN}"
+
+echo "### AWS_ACCOUNT_ID: ${AWS_ACCOUNT_ID}"
+
+echo "### AWS_REGION: ${AWS_REGION}"
+
+echo "### ECR_REPO: ${ECR_REPO}"
+
+echo "### ECR_IMAGE_VERSION: ${BUILD_VERSION}"
 
 eval $(aws --region ${AWS_REGION} ecr get-login)
 docker build -q -t ${ECR_REPO}:latest .
