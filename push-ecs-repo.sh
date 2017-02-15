@@ -16,7 +16,7 @@ echo "ECR_REPO: ${ECR_REPO}"
 echo "BUILD_VERSION: ${BUILD_VERSION}"
 
 eval $(aws --region ${AWS_REGION} ecr get-login)
-docker build -t ${ECR_REPO}:latest .
+docker build -q -t ${ECR_REPO}:latest .
 echo "Deploying docker build version: ${BUILD_VERSION} to account: ${AWS_ACCOUNT_ID} ECR repo: ${ECR_REPO}"
 docker tag ${ECR_REPO}:latest ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPO}:${BUILD_VERSION}
 echo Publish as ${ECR_REPO}:${BUILD_VERSION}
