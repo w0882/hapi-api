@@ -23,7 +23,7 @@ phases:
       - tar czf hapi-api.tar.gz *
   post_build:
     commands:
-      - bash ./push-ecs-repo.sh
+      - /usr/bin/env bash ./push-ecs-repo.sh ${AWS_ACCOUNT_ID} ${AWS_REGION} ${ECR_REPO}
 artifacts:
   files:
     - hapi-api.tar.gz
