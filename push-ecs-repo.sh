@@ -10,13 +10,13 @@ IFS=':' read -ra NAMES <<< "${BUILD_ARN}"
 
 AWS_ACCOUNT_ID=${AWS_ACCOUNT_ID:=${NAMES[4]}}
 
-echo '### BUILD_ARN: ${BUILD_ARN}'
+#echo '### BUILD_ARN: ${BUILD_ARN}'
 
-echo '### AWS_ACCOUNT_ID: ${AWS_ACCOUNT_ID}'
+echo "### AWS_ACCOUNT_ID: ${AWS_ACCOUNT_ID}"
 
-echo '### AWS_REGION: ${AWS_REGION}'
+echo "### AWS_REGION: ${AWS_REGION}"
 
-echo '### ECR_REPO: ${ECR_REPO}'
+echo "### ECR_REPO: ${ECR_REPO}"
 
 #echo "### ECR_IMAGE_TAG: ${BUILD_VERSION}"
 
