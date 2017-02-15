@@ -13,11 +13,10 @@ AWS_ACCOUNT_ID=${AWS_ACCOUNT_ID:=${NAMES[4]}}
 #echo '### BUILD_ARN: ${BUILD_ARN}'
 
 echo "### AWS_ACCOUNT_ID: ${AWS_ACCOUNT_ID}"
-
-echo "### AWS_REGION: ${AWS_REGION}"
-
-echo "### ECR_REPO: ${ECR_REPO}"
-
+#echo ''
+#echo "### AWS_REGION: ${AWS_REGION}"
+#echo ''
+#echo "### ECR_REPO: ${ECR_REPO}"
 #echo "### ECR_IMAGE_TAG: ${BUILD_VERSION}"
 
 eval $(aws --region ${AWS_REGION} ecr get-login)
