@@ -23,6 +23,7 @@ phases:
       - tar czf hapi-api.tar.gz *
   post_build:
     commands:
+      - echo $(git rev-parse ${GIT_BRANCH} | head -c 8)
       - eval $(aws --region ${AWS_REGION} ecr get-login)
       - docker build -t ${ECR_REPO}:latest .
       #- echo "Deploying docker build (version:$(git rev-parse $GIT_BRANCH | head -c 8)) to account: ${AWS_ACCOUNT_ID} ECR repo: ${ECR_REPO}"
