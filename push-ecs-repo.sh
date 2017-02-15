@@ -6,10 +6,11 @@
 AWS_ACCOUNT_ID=$1
 AWS_REGION = $2
 ECR_REPO = $3
+BUILD_ARN = $4
 
 BUILD_VERSION=$(date +%Y%m%d%H%M%S)
 
-echo $CODEBUILD_BUILD_ARN
+echo "BUILD_ARN: $BUILD_ARN"
 
 eval $(aws --region ${AWS_REGION} ecr get-login)
 docker build -t ${ECR_REPO}:latest .
