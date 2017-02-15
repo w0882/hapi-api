@@ -9,6 +9,8 @@ ECR_REPO = $3
 
 BUILD_VERSION=$(date +%Y%m%d%H%M%S)
 
+echo $CODEBUILD_BUILD_ARN
+
 eval $(aws --region ${AWS_REGION} ecr get-login)
 docker build -t ${ECR_REPO}:latest .
 echo "Deploying docker build version: ${BUILD_VERSION} to account: ${AWS_ACCOUNT_ID} ECR repo: ${ECR_REPO}"
