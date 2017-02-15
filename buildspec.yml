@@ -3,9 +3,7 @@ version: 0.1
 environment_variables:
   plaintext:
     #AWS_REGION: "us-east-1"
-    GIT_BRANCH: "HEAD"
     ECR_REPO: "weitest/hapi-api"
-    AWS_ACCOUNT_ID: "set your account ID in build project"
 
 phases:
   install:
@@ -23,9 +21,7 @@ phases:
       - tar czf hapi-api.tar.gz *
   post_build:
     commands:
-      - echo CODEBUILD_BUILD_ARN
-      - echo ${CODEBUILD_BUILD_ARN}
-      - /usr/bin/env bash ./push-ecs-repo.sh ${CODEBUILD_BUILD_ARN} ${AWS_REGION} ${ECR_REPO}
+      - /usr/bin/env bash ./push-ecs-repo.sh
 artifacts:
   files:
     - hapi-api.tar.gz

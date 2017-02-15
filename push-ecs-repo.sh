@@ -1,19 +1,19 @@
 #!/usr/bin/env bash
 
 #
-# push-ecs-repo.sh <aws-accountid> <aws-region> <ecr-repo>
+# push-ecs-repo.sh
 #
-BUILD_ARN=$1
-AWS_REGION=$2
-ECR_REPO=$3
-
+BUILD_ARN=${CODEBUILD_BUILD_ARN}
 BUILD_VERSION=$(date +%Y%m%d%H%M%S)
 
-echo "BUILD_ARN: ${BUILD_ARN}"
-echo "CODEBUILD_BUILD_IMAGE: ${CODEBUILD_BUILD_IMAGE}"
-
 IFS=':' read -ra NAMES <<< "${BUILD_ARN}"
-AWS_ACCOUNT_ID=${NAMES[4]}
+AWS_ACCOUNT_ID=${AWS_ACCOUNT_ID:=${NAMES[4]}}
+
+echo "BUILD_ARN: ${BUILD_ARN}"
+echo "AWS_ACCOUNT_ID: ${AWS_ACCOUNT_ID}"
+echo "AWS_REGION: ${AWS_REGION}"
+echo "ECR_REPO: ${ECR_REPO}"
+echo "BUILD_VERSION: ${BUILD_VERSION}"
 
 eval $(aws --region ${AWS_REGION} ecr get-login)
 docker build -t ${ECR_REPO}:latest .
