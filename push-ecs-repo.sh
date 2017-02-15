@@ -4,7 +4,7 @@
 # push-ecs-repo.sh
 #
 BUILD_ARN=${CODEBUILD_BUILD_ARN}
-BUILD_VERSION=$(date +%Y%m%d%H%M%S)
+BUILD_VERSION=$(date +%y%m%d%H%M%S)
 
 IFS=':' read -ra NAMES <<< "${BUILD_ARN}"
 
