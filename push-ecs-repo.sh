@@ -7,7 +7,7 @@ AWS_ACCOUNT_ID=$1
 AWS_REGION = $2
 ECR_REPO = $3
 
-BUILD_VERSION=$(date +%s)
+BUILD_VERSION=$(date +%Y%m%d%H%M%S)
 
 eval $(aws --region ${AWS_REGION} ecr get-login)
 docker build -t ${ECR_REPO}:latest .
