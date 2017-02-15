@@ -18,7 +18,7 @@ echo "### AWS_REGION: ${AWS_REGION}"
 
 echo "### ECR_REPO: ${ECR_REPO}"
 
-echo "### ECR_IMAGE_TAG: ${BUILD_VERSION}"
+#echo "### ECR_IMAGE_TAG: ${BUILD_VERSION}"
 
 eval $(aws --region ${AWS_REGION} ecr get-login)
 docker build -q -t ${ECR_REPO}:latest .
