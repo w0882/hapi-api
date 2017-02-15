@@ -3,9 +3,9 @@
 #
 # push-ecs-repo.sh <aws-accountid> <aws-region> <ecr-repo>
 #
-BUILD_ARN = $1
-AWS_REGION = $2
-ECR_REPO = $3
+BUILD_ARN=$1
+AWS_REGION=$2
+ECR_REPO=$3
 
 BUILD_VERSION=$(date +%Y%m%d%H%M%S)
 
