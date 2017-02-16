@@ -10,7 +10,9 @@
                 "ecr:GetAuthorizationToken",
                 "ecr:InitiateLayerUpload",
                 "ecr:PutImage",
-                "ecr:UploadLayerPart"
+                "ecr:UploadLayerPart",
+                "ecs:RegisterTaskDefinition",
+                "ecs:UpdateService"
             ],
             "Resource": [
                 "*"
