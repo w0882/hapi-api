@@ -33,5 +33,5 @@ phases:
       - /usr/bin/env bash ./deploy-ecs.sh
 artifacts:
   files:
-    - ./*.tar.gz
+    - '*.tar.gz'
   discard-paths: yes
