@@ -5,10 +5,11 @@ environment_variables:
     #AWS_REGION: "us-east-1"
     APP_NAME: "hapi-api"
     ECR_REPO: "hapi-api"
-    DEPLOY_TO_ECS_CLUSTER: "true"
+    DEPLOY_TO_ECS_CLUSTER: "false"
     ECS_CLUSTER: "testhapi-api"
     ECS_SERVICE: "hapi-api-service"
     ECS_TASK: "hapi-api-task"
+    ECS_TASK_MEMORY: 300
     ECS_TASK_PORTMAPPINGS: "[{containerPort=9000,hostPort=80,protocol=tcp}]"
     ECS_CONTAINER: "hapi-api-container"
 
@@ -32,5 +33,5 @@ phases:
       - /usr/bin/env bash ./deploy-ecs.sh
 artifacts:
   files:
-    - ${APP_NAME}.gz
+    - *.tar.gz
   discard-paths: yes
