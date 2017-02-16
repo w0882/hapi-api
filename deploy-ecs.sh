@@ -21,3 +21,9 @@ echo "Deploying docker image with tag: ${BUILD_VERSION} to account: ${AWS_ACCOUN
 docker tag ${ECR_REPO}:latest ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPO}:${BUILD_VERSION}
 echo Publish as ${ECR_REPO}:${BUILD_VERSION}
 docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPO}:${BUILD_VERSION}
+
+if [ $DEPLOY_TO_ECS_CLUSTER = 'true' ]; then
+  echo aws ecs register-task-definition --family ${ECS_TASK} --container-definitions "name=${ECS_CONTAINER},image=${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPO}:${BUILD_VERSION},memory=300,portMappings=${ECS_TASK_PORTMAPPINGS}" --region ${AWS_REGION}
+  echo ''
+  echo aws ecs update-service --cluster ${ECS_CLUSTER} --service ${ECS_SERVICE} --task-definition ${ECS_TASK} --region ${AWS_REGION}
+fi

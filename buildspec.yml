@@ -3,7 +3,15 @@ version: 0.1
 environment_variables:
   plaintext:
     #AWS_REGION: "us-east-1"
-    ECR_REPO: "weitest/hapi-api"
+    APP_NAME: "hapi-api"
+    ECR_REPO: "hapi-api"
+    DEPLOY_TO_ECS_CLUSTER: "true"
+    ECS_CLUSTER: "testhapi-api"
+    ECS_SERVICE: "hapi-api-service"
+    ECS_TASK: "hapi-api-task"
+    ECS_TASK_PORTMAPPINGS: "[{containerPort=9000,hostPort=80,protocol=tcp}]"
+    ECS_CONTAINER: "hapi-api-container"
+
 
 phases:
   install:
@@ -18,11 +26,11 @@ phases:
   build:
     commands:
       - npm test
-      - tar czf hapi-api.tar.gz *
+      - tar czf ${APP_NAME}.tar.gz *
   post_build:
     commands:
-      - /usr/bin/env bash ./push-ecs-repo.sh
+      - /usr/bin/env bash ./deploy-ecs.sh
 artifacts:
   files:
-    - hapi-api.tar.gz
+    - ${APP_NAME}.gz
   discard-paths: yes
