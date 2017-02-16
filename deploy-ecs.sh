@@ -23,7 +23,9 @@ echo Publish as ${ECR_REPO}:${BUILD_VERSION}
 docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPO}:${BUILD_VERSION}
 
 if [ $DEPLOY_TO_ECS_CLUSTER = 'true' ]; then
-  echo aws ecs register-task-definition --family ${ECS_TASK} --container-definitions "name=${ECS_CONTAINER},image=${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPO}:${BUILD_VERSION},memory=${ECS_TASK_MEMORY},portMappings=${ECS_TASK_PORTMAPPINGS}" --region ${AWS_REGION}
+  echo "### aws ecs register-task-definition --family ${ECS_TASK} --container-definitions "name=${ECS_CONTAINER},image=${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPO}:${BUILD_VERSION},memory=${ECS_TASK_MEMORY},portMappings=${ECS_TASK_PORTMAPPINGS}" --region ${AWS_REGION}"
+  aws ecs register-task-definition --family ${ECS_TASK} --container-definitions "name=${ECS_CONTAINER},image=${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPO}:${BUILD_VERSION},memory=${ECS_TASK_MEMORY},portMappings=${ECS_TASK_PORTMAPPINGS}" --region ${AWS_REGION}
   echo ''
-  echo aws ecs update-service --cluster ${ECS_CLUSTER} --service ${ECS_SERVICE} --task-definition ${ECS_TASK} --region ${AWS_REGION}
+  echo "### aws ecs update-service --cluster ${ECS_CLUSTER} --service ${ECS_SERVICE} --task-definition ${ECS_TASK} --region ${AWS_REGION}"
+  aws ecs update-service --cluster ${ECS_CLUSTER} --service ${ECS_SERVICE} --task-definition ${ECS_TASK} --region ${AWS_REGION}
 fi
