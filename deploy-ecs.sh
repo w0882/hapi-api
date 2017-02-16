@@ -14,6 +14,7 @@ echo "### AWS_ACCOUNT_ID: ${AWS_ACCOUNT_ID}, AWS_REGION: ${AWS_REGION}, ECR_REPO
 #echo "### AWS_REGION: ${AWS_REGION}"
 #echo "### ECR_REPO: ${ECR_REPO}"
 #echo "### ECR_IMAGE_TAG: ${BUILD_VERSION}"
+echo ''
 echo "### Login to ECS docker env ..."
 eval $(aws --region ${AWS_REGION} ecr get-login)
 docker build -q -t ${ECR_REPO}:latest .
